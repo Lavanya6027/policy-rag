@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HR Assistant - Lia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🤖 HR Assistant - Lia</h1>
+
+  <label for="queryType">Query Type:</label>
+  <select id="queryType">
+    <option>General</option>
+    <option>Leave Policy</option>
+    <option>Travel Policy</option>
+    <option>Payroll</option>
+  </select>
+
+  <div id="chatWindow"></div>
+
+  <div class="input-area">
+    <input id="queryInput" type="text" placeholder="Ask your question..." />
+    <button onclick="sendQuery()">Send</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
