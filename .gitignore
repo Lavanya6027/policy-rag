@@ -1,0 +1,14 @@
+# -----------------------
+# Python
+# -----------------------
+rag/__pycache__/
+rag/logs
+rags/.env
+
+# Virtual environments
+rag/venv/
+rag/ENV/
+rag/env/
+
+
+
