@@ -3,7 +3,7 @@
 # -----------------------
 rag/__pycache__/
 rag/logs
-rags/.env
+rag/.env
 
 # Virtual environments
 rag/venv/
