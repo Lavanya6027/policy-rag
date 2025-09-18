@@ -1,0 +1,12 @@
+### Test llama3.1:8b locally
+POST http://10.16.5.37:2255/api/
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello, can you introduce yourself?"
+    }
+  ]
+}

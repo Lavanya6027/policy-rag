@@ -5,7 +5,7 @@ from extractors import ExtractorDispatcher, PDFExtractor, DocxExtractor, TxtExtr
 from preprocessing import Normalizer, Chunker
 from embeddings import SBERTEmbedder, FAISSVectorStore
 from rag import RAGPipeline
-from llm import GeminiAIClient, AIAnswerService
+from llm import GeminiAIClient, AIAnswerService, OllamaAIClient
 from flask import Flask, request, jsonify
 from config import Config
 
@@ -55,7 +55,8 @@ try:
     store = FAISSVectorStore(embedding_dim=384)
     rag = RAGPipeline(embedder, store, chunker, normalizer)
     gemini = GeminiAIClient()
-    ai_service = AIAnswerService(gemini)
+    ollama = OllamaAIClient()
+    ai_service = AIAnswerService(ollama)
     logger.info("RAG pipeline components initialized successfully.")
 except Exception as e:
     logger.critical(f"Failed to initialize RAG components: {e}")
@@ -105,7 +106,13 @@ if __name__ == "__main__":
 
             chunks = rag.retrieve(query, top_k=10)
             response = ai_service.get_answer(query, chunks)
-            return jsonify({"answer": response["answer"]})
+            return jsonify({
+                "answer": response.get("answer"),
+                "tokens": response.get("tokens", 0),
+                "response_time": response.get("response_time", 0),
+                "error": response.get("error")
+            })
+
         except Exception as e:
             logger.error(f"Error during chat request: {e}")
             return jsonify({"error": "An internal error occurred"}), 500
