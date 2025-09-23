@@ -56,7 +56,7 @@ try:
     rag = RAGPipeline(embedder, store, chunker, normalizer)
     gemini = GeminiAIClient()
     ollama = OllamaAIClient()
-    ai_service = AIAnswerService(ollama)
+    ai_service = AIAnswerService(gemini)
     logger.info("RAG pipeline components initialized successfully.")
 except Exception as e:
     logger.critical(f"Failed to initialize RAG components: {e}")
@@ -94,6 +94,28 @@ if __name__ == "__main__":
 
     # Flask app
     app = Flask(__name__)
+
+    @app.route("/chat-with-model", methods=["POST"])
+    def use_model_only():
+        """Handle chat queries using only the LLM model without RAG."""
+        try:
+            data = request.json
+            prompt = data.get("query", "")
+            if not query.strip():
+                return jsonify({"error": "Query is required"}), 400
+
+            response = ai_service.test_get_answer(prompt)
+
+            return jsonify({
+                "answer": response.get("answer"),
+                "tokens": response.get("tokens", 0),
+                "response_time": response.get("response_time", 0),
+                "error": response.get("error")
+            })
+
+        except Exception as e:
+            logger.error(f"Error during model-only chat request: {e}")
+            return jsonify({"error": "An internal error occurred"}), 500
 
     @app.route("/chat", methods=["POST"])
     def chat():

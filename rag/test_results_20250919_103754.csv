@@ -1,0 +1,99 @@
+Query,Answer,ResponseTime(sec),Token Count
+I am a Manager going to Kochi for 2 days on business travel. What is my daily allowance?,"I don’t know based on the provided policy. The context does not specify the employee category for a ""Manager"" or the city category for ""Kochi"", which are necessary to determine the daily allowance for business travel.",5.072,3141
+ I am a Senior Project Lead traveling to Delhi for 3 days of project-related work. How much daily allowance can I claim?,"I don’t know based on the provided policy. The policy does not specify which city category Delhi falls under (A, B, or C) nor does it define which employee category (1, 2, 3, or 4) a Senior Project Lead belongs to for domestic travel allowances.",3.321,3058
+" As a Trainee, I have to go to Hyderabad for 5 days of training. What travel mode and accommodation budget am I eligible for?","I don’t know based on the provided policy. The context does not specify the employee category for a ""Trainee"" nor the city classification for ""Hyderabad"". Without this information, the eligible travel mode and accommodation budget cannot be determined from the provided policy.",6.22,3147
+" I am a Vice President visiting Pune for 1 day. Can I book a flight, and what will be my hotel entitlement?","1.  **Flight Booking:** Generally, all travel-related bookings and arrangements are done by the Operations department. If a travel booking is done by an employee in an emergency, it shall be reimbursed as per eligibility during tour settlement.
+2.  **Hotel Entitlement:** As a Vice President, you are in Category 1. Pune is classified as a Class B city. Therefore, your hotel entitlement for accommodation is ""Actuals"".",5.826,3145
+ I am a Senior QA Engineer going to Mangalore for 4 days of business travel. How much allowance do I get per day?,"I don’t know based on the provided policy. The policy does not specify which employee category (Category 1, 2, 3, or 4) a ""Senior QA Engineer"" falls into, which is required to determine the daily allowance for business travel to Mangalore (a Category B city).",2.719,3146
+I am a Project Lead traveling to Mangalore for a 3-day project meeting. What travel and accommodation entitlements apply to me?,"Here are your travel and accommodation entitlements:
+
+1.  **Employee Category:** Project Lead falls under **Category 3**.
+2.  **Destination Class:** Mangalore is a **Class B** city.
+3.  **Travel Type:** A 3-day project meeting is classified as **Business Travel**.
+
+Based on this:
+
+*   **Accommodation Eligibility (Category 3, Class B):** You are eligible for INR 2000 per night for accommodation.
+*   **Daily Allowance Eligibility (Category 3, Class B, Business Travel):** You are eligible for a daily allowance of INR 500. For a 3-day trip, this totals to INR 1500 (3 days * INR 500/day).
+*   **Mode of Travel (Category 3):** You are eligible to travel by Train/Bus (II AC / III AC / AC Sleeper / Semi Sleeper).",4.994,3144
+ I’m a Senior Manager attending a workshop in Delhi. What is my daily allowance?,"I don’t know based on the provided policy. The policy does not specify the employee category for a ""Senior Manager"" nor does it classify ""Delhi"" into a city category (A, B, or C), which are necessary to determine the daily allowance from the provided tables.",4.044,3137
+A trainee has to visit Hyderabad for training. What mode of travel and hotel stay are allowed?,"Based on the provided policy:
+
+**Mode of travel:**
+A trainee (Category 4) is allowed to travel by Train/Bus in II AC / III AC / AC Sleeper / Semi Sleeper.
+
+**Hotel Stay:**
+The policy states that ""Accommodation Eligibility... criteria specified"" and ""Revised accommodation eligibility..."". However, the specific details or tables outlining the hotel stay eligibility for Category 4 employees (Trainees) visiting Class B cities (Hyderabad) are not provided in the given context. The general guideline is that employees should stay in company guest houses/apartments if available; otherwise, the company will arrange hotel bookings or alternate arrangements.
+
+Therefore, I don’t know the specific hotel stay entitlement for a trainee in Hyderabad based on the provided policy.",5.704,3140
+" If a Senior QA Engineer travels to Calcutta for 2 days, what can they claim for consolidated daily allowance?","I don’t know based on the provided policy. The policy does not specify which city category Calcutta falls under (A, B, or C) nor does it define which employee category (1, 2, 3, or 4) a ""Senior QA Engineer"" belongs to for domestic travel allowances.",5.724,3017
+ I used my private two-wheeler for official travel to a client site. How much can I claim per kilometer?,Mileage allowance for a private two-wheeler is Rs.4/per km.,1.771,2738
+ I traveled for 20 hours only to Bangalore. Am I eligible for full daily allowance?,"No, you are not eligible for a full daily allowance.
+
+For a stay at the destination city that is less than 24 hours, you are eligible to claim food and incidental expenses at actuals, but not exceeding 70% of the Daily Allowance applicable in your category.",3.329,3138
+ How does business travel allowance differ between Category 1 and Category 4 employees in Class A cities?,"For Business Travel in Class A cities:
+*   **Category 1** employees are eligible for a daily allowance of **1200**.
+*   **Category 4** employees are eligible for a daily allowance of **500**.",2.084,3015
+What is the difference between allowances for business travel and project-related travel?,"The allowances for project-related travel are higher than for business travel across all employee categories and city classes.
+
+Here's a breakdown of the consolidated daily allowance differences (Project Related Travel vs. Business Travel):
+
+**City Category A:**
+*   **CATEGORY 1:** Project Related: 3000, Business: 2000 (Difference: 1000)
+*   **CATEGORY 2:** Project Related: 2500, Business: 1500 (Difference: 1000)
+*   **CATEGORY 3:** Project Related: 1500, Business: 1000 (Difference: 500)
+*   **CATEGORY 4:** Project Related: 900, Business: 750 (Difference: 150)
+
+**City Category B:**
+*   **CATEGORY 1:** Project Related: 2250, Business: 1500 (Difference: 750)
+*   **CATEGORY 2:** Project Related: 2000, Business: 1000 (Difference: 1000)
+*   **CATEGORY 3:** Project Related: 1000, Business: 750 (Difference: 250)
+*   **CATEGORY 4:** Project Related: 750, Business: 600 (Difference: 150)
+
+**City Category C:**
+*   **CATEGORY 1:** Project Related: 1600, Business: 1000 (Difference: 600)
+*   **CATEGORY 2:** Project Related: 1500, Business: 750 (Difference: 750)
+*   **CATEGORY 3:** Project Related: 800, Business: 600 (Difference: 200)
+*   **CATEGORY 4:** Project Related: 600, Business: 500 (Difference: 100)",5.646,3010
+ Compare the accommodation eligibility of Category 2 employees in Class A vs Class C cities.,"For Category 2 employees:
+*   In Class A cities, the accommodation eligibility benchmark is INR 3500.
+*   In Class C cities, the accommodation eligibility benchmark is INR 1500.",1.798,3138
+What happens if an employee does not settle their travel advance within a month?,"If a travel advance remains unsettled for more than a month after return, it will be adjusted against the next immediate salary payable to the concerned employee.",1.699,3128
+ Are laundry and personal entertainment expenses reimbursable?,"Based on the provided policy:
+
+**Laundry:**
+*   **International Travel:** Laundry expenses are reimbursable under specific conditions:
+    *   For employees staying at a hotel on trips of 5 days or more, against actual bills.
+    *   If company-provided accommodation has washing facilities, laundry expenses will not be reimbursed.
+    *   If the duration of travel exceeds a month and company-provided accommodation/apartment does not have washing facilities, laundry expenses up to $20 per month will be reimbursed.
+*   **Domestic Travel:** Laundry expenses are generally not reimbursable as they are listed under general exclusions.
+
+**Personal Entertainment Expenses:**
+*   Personal entertainment expenses are not reimbursable for both international and domestic travel, as they are explicitly listed under general exclusions in both policies.",5.651,3005
+ Can family travel expenses be claimed during official travel?,"No, the company will not reimburse expenses for employee's family travel during official travel, as it is listed under general exclusions.",1.535,3007
+ What penalties apply if an employee cancels a ticket late without informing the Operations department?,"Failure to inform the Operations department about a ticket change or cancellation on time might result in a penalty, which will be charged to the employee unless it is no-fault of the employee.",3.691,2791
+Is social media sharing of travel itineraries allowed?,"No, sharing travel itineraries for the purpose of social networking is not allowed. Travelers may forward itinerary information only to immediate personal contacts for convenience and safety.",1.772,2995
+ How do I request travel approval in Heads portal?,"Requests for all travel arrangements, including requests for Travel Advance, shall be made through the Heads portal. Official travel should be authorized by the concerned Department Head through Heads.
+
+The link for the Heads portal is http://heads.thinkpalm.lan/Tour/.
+
+The traveler must initiate the process at least two weeks prior to the travel date for domestic travel, which will then be approved by the Reporting Officer/HOD.",3.298,2873
+What documents do I need to submit after completing a trip?,"After completing a trip, you need to submit the following documents:
+
+1.  **Prescribed travel settlement form** (also referred to as Tour Settlement Form).
+2.  **All Bills / Vouchers in original**.
+3.  **Travel claim statement** (along with the travel settlement form).
+4.  **Tour report**, approved by your departmental head.
+5.  **Expense statement** (along with the tour report).
+6.  For any lost receipts, an explanation from the employee acknowledged by the Reporting Officer/HOD.
+
+These documents, including the Tour Settlement Form, should be submitted through Heads within 7 days of arrival in the office.",3.357,3125
+What should I do if I lose a travel expense receipt?,Any lost receipt must be explained by the employee and acknowledged by the Reporting Officer/HOD.,1.908,3000
+Can I use Ola/Uber for local travel during official trips?,"Yes, you can use Ola/Uber for local travel during official trips. The policy states that ""Only carriers with the lowest rental rates (Metro, Ola, Uber, Meru, Public or Private Bus Service etc) should be used both at the originating city and destination city.""",2.024,3133
+ What is the process for claiming entertainment expenses?,"For claiming entertainment expenses, the following process should be followed:
+
+1.  **Prior Approval (for other than Category 1 employees):** Category 2 employees (and implicitly Category 3 and 4, if applicable, based on similar phrasing in both domestic and international policies) must take prior e-mail approval from the Department Head before incurring any entertainment expenses. Category 1 employees are eligible to claim without prior email approval.
+2.  **During Entertainment:** The business discussion must take place before, during, or immediately following the entertainment. Employees must use good judgment and avoid extravagance, as reimbursement is limited to reasonable costs.
+3.  **Documentation:** For claiming the entertainment expenses, the purpose and the details regarding the guests shall be furnished along with the Tour Settlement Form.
+4.  **Submission:** Once the employee returns from travel, he/she should submit all expenses through Heads using the Tour Settlement Form within 7 days of arrival in office.
+5.  **Approval & Receipts:** The Tour Settlement Form must have the approval of the Reporting Officer/HOD with all required original receipts and bills attached against every expense incurred. Any lost receipt must be explained by the employee and acknowledged by the Reporting Officer/HOD.",4.316,3006
