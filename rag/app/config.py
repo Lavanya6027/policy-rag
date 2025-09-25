@@ -10,6 +10,7 @@ class Config:
     # AI Model
     OLLAMA_MODEL = os.getenv("OLLAMA_MODEL")
     OLLAMA_API_URL = os.getenv("OLLAMA_API_URL")
+    OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", 120))  # seconds
 
     # Vectorstore & embeddings
     VECTORSTORE_PATH = Path(os.getenv("VECTORSTORE_PATH", BASE_DIR / "chroma_store"))

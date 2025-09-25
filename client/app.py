@@ -17,8 +17,10 @@ if st.button("Ask"):
     if user_query.strip():
         with st.spinner("Thinking..."):
             response = requests.post(f"{BACKEND_URL}/chat", json={"query": user_query})
+            data = response.json()
+
             if response.status_code == 200:
-                st.markdown(f"**Answer:** {response.json()['answer']}")
+                st.markdown(f"{data['answer']}")
             else:
                 st.error(" Failed to fetch answer.")
     else:

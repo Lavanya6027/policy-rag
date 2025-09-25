@@ -23,18 +23,18 @@ class OllamaAIClient:
         self.base_url = base_url.rstrip("/")
 
     def _send_request(self, prompt: str) -> tuple[str, float]:
-        """Send chat request to Ollama and stream response back."""
+        """Send generate request to Ollama and stream response back."""
         start_time = time.time()
         try:
             response = requests.post(
-                f"{self.base_url}/api/chat",
+                f"{self.base_url}/api/generate",
                 json={
                     "model": self.model,
-                    "messages": [{"role": "user", "content": prompt}],
+                    "prompt": prompt,
                     "stream": True
                 },
                 stream=True,
-                timeout=120
+                timeout=Config.OLLAMA_TIMEOUT
             )
             response.raise_for_status()
 
@@ -43,9 +43,7 @@ class OllamaAIClient:
                 if line:
                     try:
                         data = json.loads(line.decode("utf-8"))
-                        if "message" in data and "content" in data["message"]:
-                            full_response.append(data["message"]["content"])
-                        elif "response" in data:
+                        if "response" in data:
                             full_response.append(data["response"])
                         if data.get("done", False):
                             break
@@ -57,6 +55,7 @@ class OllamaAIClient:
         except Exception as e:
             elapsed = round(time.time() - start_time, 3)
             raise RuntimeError(f"Ollama error: {e}") from e
+
 
     def generate_answer(self, query: str, chunks: list = None, prompt_template: str = None) -> dict:
         """Generate answer using Ollama AI with optional custom prompt."""

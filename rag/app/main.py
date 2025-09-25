@@ -45,6 +45,7 @@ def generate_answer(question: str):
         initial_k=TOP_K_CHUNKS_ON_RERANKER,
         final_k=TOP_K_CHUNKS_ON_RETRIEVER
     )
+    print(f"[DEBUG] Retrieved context: {context}")
 
     query_template = f"""
 You are an AI assistant specialized in answering company policy and HR-related queries.
@@ -74,8 +75,14 @@ def chat():
         if not question:
             return jsonify({"error": "Query is required"}), 400
 
-        answer = generate_answer(question)
-        return jsonify({"answer": answer})
+        response_data = generate_answer(question)
+        return jsonify({
+            "answer": response_data["answer"],
+            "tokens": response_data["tokens"],
+            "response_time": response_data["response_time"],
+            "error": response_data["error"]
+        })
+
 
     except Exception as e:
         print(f"[ERROR] {e}")

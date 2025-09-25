@@ -1,14 +1,58 @@
-# -----------------------
-# Python
-# -----------------------
-rag/__pycache__/
-rag/logs
-rag/.env
+# -----------------------------
+# Python cache and logs
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
 
-# Virtual environments
-rag/venv/
-rag/ENV/
-rag/env/
+# Logs
+rag/logs/
+*.log
 
+# -----------------------------
+# Environment and secrets
+# -----------------------------
+.env
+*.env
+.env.*
+venv/
+ENV/
+env/
+.venv/
 
+# -----------------------------
+# Python virtual environments
+# -----------------------------
+.venv/
+env/
+ENV/
+venv/
 
+# -----------------------------
+# OS files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# IDE / editor files
+# -----------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# -----------------------------
+# Data / output files
+# -----------------------------
+*.xlsx
+*.csv
+*.db
+*.sqlite
+
+# -----------------------------
+# Chroma / RAG vectorstore
+# -----------------------------
+chroma_store/
