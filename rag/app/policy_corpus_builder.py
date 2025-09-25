@@ -91,7 +91,7 @@ class PolicyCorpusBuilder:
                 documents=docs,
                 embedding=embeddings,
                 ids=ids,
-                persist_directory=self._persist_dir
+                persist_directory=str(self._persist_dir)
             )
             self._vectorstore.persist()
             print("[INFO] New vectorstore created and persisted successfully!")
