@@ -176,6 +176,28 @@
     "id": "domestic_travel_policy_chunk8_ac201a3f"
   },
   {
+    "text": "Consolidated Daily Allowance Policy Domestic Travel TP/OPS/DTP3.0 dated 25 April 2019. Employees opting for self-arranged accommodation are eligible for consolidated daily allowance at flat rates per day based on employee category and city class. Claims must be submitted with expense statements and relevant bills. Claims without bills are subject to income tax deductions as per prevailing rules.For Business Travel the daily allowance in INR is as follows. City Class A which includes Delhi Mumbai Bangalore. Category 1 is 2000 Category 2 is 1500 Category 3 is 1000 Category 4 is 750. City Class B which includes Chennai Calcutta Hyderabad Pune Mangalore Kochi and all State Capitals. Category 1 is 1500 Category 2 is 1000 Category 3 is 750 Category 4 is 600. City Class C which includes all other cities. Category 1 is 1000 Category 2 is 750 Category 3 is 600 Category 4 is 500. For Project Related Travel the daily allowance in INR is as follows. City Class A Category 1 is 3000 Category 2 is 2500 Category 3 is 1500 Category 4 is 900. City Class B Category 1 is 2250 Category 2 is 2000 Category 3 is 1000 Category 4 is 750. City Class C Category 1 is 1600 Category 2 is 1500 Category 3 is 800 Category 4 is 600. Conveyance guidelines. Employees must choose cost effective and safe ground transport such as Metro Ola Uber Meru Public or Private Bus. Car rentals should be shared when multiple employees travel together. Autos are permitted only when other services are unavailable. For project related travels exceeding one month at the same location a monthly allowance of up to INR 1000 against bills is provided for local commute between home office airport railway station bus station and return.",
+    "metadata": {
+      "title": "Consolidated Daily Allowance Policy for Self-Arranged Accommodation",
+      "topics": [
+        "Consolidated Daily Allowance",
+        "Self-Arranged Accommodation",
+        "Expense Claims",
+        "Income Tax Deductions",
+        "Employee Categories",
+        "City Classification"
+      ],
+      "document_id": "TP/OPS/DTP3.0",
+      "effective_date": "2019-04-25"
+    },
+    "source_name": "domestic_travel_policy.pdf",
+    "page": null,
+    "no_of_char": 344,
+    "no_of_words": 54,
+    "no_of_tokens": 54,
+    "id": "domestic_travel_policy_chunk_consolidated_allowance_25apr2019"
+  },
+  {
     "text": "The Domestic Travel Policy details entertainment expenses and travel reporting. Category 1 employees can claim entertainment expenses for business, while Category 2 requires prior email approval from their Department Head. Expenses must be reasonable, serving to develop goodwill or secure new business, with discussions occurring around the entertainment. Extravagance is prohibited, and claims require detailed purpose and guest information. Upon returning from travel, employees must submit all expenses via the 'Heads' system using a Tour Settlement Form within seven days. This form needs Reporting Officer/HOD approval and original itemized receipts. Lost receipts must be explained by the employee and acknowledged by the Reporting Officer/HOD to ensure timely settlements.",
     "metadata": {
       "title": "Entertainment Expense Policy and Travel Expense Reporting",
@@ -2593,10 +2615,7 @@
       ],
       "document_id": "TP-Pte/HR/LP1.0",
       "document_date": "2024-08-01",
-      "policy_sections": [
-        "4.3 Compensatory Off",
-        "4.4 Public Holidays"
-      ]
+      "policy_sections": ["4.3 Compensatory Off", "4.4 Public Holidays"]
     },
     "source_name": "leave_policy_singapore.pdf",
     "page": null,
@@ -2795,11 +2814,7 @@
         "Management Discretion"
       ],
       "document_id": "TP/HR/LP1.17",
-      "leave_types": [
-        "Casual Leave",
-        "Earned Leave",
-        "Leave Travel Allowance"
-      ],
+      "leave_types": ["Casual Leave", "Earned Leave", "Leave Travel Allowance"],
       "total_company_holidays": 13
     },
     "source_name": "leave_policy.pdf",
@@ -3189,11 +3204,7 @@
       "country": "India",
       "states": "Kerala, Tamil Nadu",
       "number_of_facilities": 4,
-      "locations_listed": [
-        "Kochi",
-        "Trivandrum",
-        "Chennai"
-      ]
+      "locations_listed": ["Kochi", "Trivandrum", "Chennai"]
     },
     "source_name": "operations_handbook.pdf",
     "page": null,
@@ -3516,10 +3527,7 @@
         "employer transportation"
       ],
       "other_metadata": {
-        "Key Definitions": [
-          "Sexual Harassment",
-          "Workplace"
-        ],
+        "Key Definitions": ["Sexual Harassment", "Workplace"],
         "Scope": "Broad",
         "Examples": "Explicit acts, implied circumstances",
         "Coverage": "Physical and psychological harm"

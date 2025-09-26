@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
 from pathlib import Path
+import json
+from datetime import datetime
+from typing import List, Optional
 from app.document_loaders import JSONChunkLoader
 from app.retriever import PolicyRetriever, init_policy_retriever
 from app.llm import AIAnswerService, OllamaAIClient
@@ -35,6 +38,34 @@ docs = doc_loader.load()
 ollama_client = OllamaAIClient()
 ai_service = AIAnswerService(ollama_client)
 
+BACKUP_LOG_FILE = Path("rag_query_logs.json")
+
+def log_interaction(query: str, chunk_ids: list, response: str):
+    # Create a log entry
+    entry = {
+        "timestamp": datetime.now().isoformat(),
+        "query": query,
+        "chunk_ids": chunk_ids,
+        "response": response
+    }
+
+    # If file exists, load it, otherwise start with empty list
+    if BACKUP_LOG_FILE.exists():
+        with open(BACKUP_LOG_FILE, "r", encoding="utf-8") as f:
+            try:
+                logs = json.load(f)
+            except json.JSONDecodeError:
+                logs = []
+    else:
+        logs = []
+
+    # Append new entry
+    logs.append(entry)
+
+    # Save back
+    with open(BACKUP_LOG_FILE, "w", encoding="utf-8") as f:
+        json.dump(logs, f, indent=2, ensure_ascii=False)
+
 # -----------------------------
 # Helper: generate answer
 # -----------------------------
@@ -62,6 +93,10 @@ Question:
 {question}
 """
     response = ai_service.get_answer(query=query_template)
+
+    # backup log
+    chunk_ids = [chunk["id"] for chunk in chunks]
+    log_interaction(query=question, chunk_ids=chunk_ids, response=response)
     return response
 
 # -----------------------------

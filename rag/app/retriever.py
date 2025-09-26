@@ -116,7 +116,7 @@ class PolicyRetriever:
 
         # 5. Serialize results
         context = "\n\n".join(
-            f"Source: {doc.metadata.get('source_name', 'N/A')}\nContent: {doc.page_content}\nID: {doc.metadata.get('id', 'N/A')}"
+            f"Source: {doc.metadata.get('source_name', 'N/A')}\nContent: {doc.page_content}\n"
             for doc in reranked_docs
         )
 
@@ -126,7 +126,6 @@ class PolicyRetriever:
             "id": doc.metadata.get("id", "N/A")}
             for doc in reranked_docs
         ]
-
         return context, serialized_chunks
 
 # -----------------------------
