@@ -56,3 +56,6 @@ Thumbs.db
 # Chroma / RAG vectorstore
 # -----------------------------
 chroma_store/
+vector_store/
+corpora/
+temp/
