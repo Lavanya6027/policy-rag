@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, status
 from fastapi.responses import JSONResponse
 import logging
+from datetime import datetime
 from app.routers import resources 
 from app.app_context import (
     lifespan_startup_shutdown, 
@@ -8,10 +9,12 @@ from app.app_context import (
     update_rag_retriever,     
     EmbeddingModelDep,
     RetrieverDep,
-    AIServiceDep         
+    AIServiceDep,
+    get_chat_logger     
 )
 from app.data_models import QueryRequest, RAGResponse 
-from app.core.rag_chain_service import process_rag_query 
+from app.core.rag_chain_service import process_rag_query
+from app.core.chat_logger import ChatLogger 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -67,7 +70,8 @@ def refresh_corpora(embedding_model: EmbeddingModelDep):
 async def chat_with_assistant(
     request: QueryRequest,
     retriever: RetrieverDep,
-    ai_service: AIServiceDep
+    ai_service: AIServiceDep,
+    chat_logger: ChatLogger = Depends(get_chat_logger)
 ):
     """
     Executes a RAG query/chat turn:
@@ -76,8 +80,22 @@ async def chat_with_assistant(
     3. Engineers a prompt with the context and question.
     4. Sends the final prompt to the LLM (Ollama/Gemini) for a grounded answer.
     """
+    chat_log = {
+        "timestamp": datetime.now().isoformat,
+        "query": request.query
+    }
+    start_time = datetime.now()
+
     response = await process_rag_query(request, retriever, ai_service)
-    
+
+    end_time = datetime.now()
+    elapsed_time = end_time - start_time
+
+    chat_log["response_time"] = elapsed_time
+    chat_log["llm_response"] = response.answer
+    chat_log["retrieved context"] = response.context
+    chat_log["model_name"] = response.model_name
+
     if response.error:
         logger.error(f"Chat endpoint returned an error: {response.error}")
         return JSONResponse(

@@ -2,7 +2,7 @@ import os
 import logging
 from contextlib import asynccontextmanager
 from typing import Dict, Any, Annotated
-from fastapi import Depends, status
+from fastapi import Depends, status, Request
 from fastapi.responses import JSONResponse
 from langchain_core.embeddings import Embeddings 
 from langchain_core.retrievers import BaseRetriever
@@ -13,12 +13,10 @@ from app.db.repository import JsonRepository
 from app.data_models import ResourceModel 
 from app.core.embeddings import load_embedding_model 
 from app.core.llm import AIService 
-# FIX: Replacing ParentDocumentRetrieverLoader with VectorRetrieverLoader
 from app.retrievers.vector_retriever import VectorRetrieverLoader 
-
-# Assuming QueryRequest, RAGResponse, and process_rag_query are defined/imported elsewhere
 from app.data_models import QueryRequest, RAGResponse 
 from app.core.rag_chain_service import process_rag_query 
+from app.core.chat_logger import ChatLogger
 
 logger = logging.getLogger(__name__)
 
@@ -75,8 +73,10 @@ async def lifespan_startup_shutdown(app: Any):
         resource_repo = JsonRepository(db_manager, 'resources', ResourceModel)
         embedding_model = load_embedding_model() 
         ai_service = AIService() 
-
         rag_retriever = initialize_rag_retriever(embedding_model=embedding_model, cleanup_existing=RAG_CLEANUP_EXISTING)
+
+        chat_logger = ChatLogger()
+        app.state.chat_logger = chat_logger
 
         STATE['DB_MANAGER'] = db_manager
         STATE['RESOURCE_REPO'] = resource_repo
@@ -120,6 +120,9 @@ def get_ai_service() -> AIService:
     if 'AI_SERVICE' not in STATE:
         raise RuntimeError("AI_SERVICE not initialized. Check FastAPI lifespan setup.")
     return STATE['AI_SERVICE']
+
+def get_chat_logger(request: Request):
+    return request.app.state.chat_logger
 
 EmbeddingModelDep = Annotated[Embeddings, Depends(get_embedding_model)]
 RetrieverDep = Annotated[BaseRetriever, Depends(get_rag_retriever)]

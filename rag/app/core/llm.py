@@ -5,7 +5,7 @@ import logging
 from typing import Protocol, Any, Dict, Literal
 # from google import genai 
 # from google.genai.errors import APIError
-from app.config import Config 
+from app.core.config import OLLAMA_MODEL, OLLAMA_BASE_URL, OLLAMA_TIMEOUT
 
 logger = logging.getLogger("AIService")
 
@@ -27,7 +27,7 @@ class BaseAIService(Protocol):
 class OllamaAIService:
     """Handles direct communication with a self-hosted Ollama endpoint."""
     
-    def __init__(self, model: str = Config.OLLAMA_MODEL, base_url: str = Config.OLLAMA_API_URL):
+    def __init__(self, model: str = OLLAMA_MODEL, base_url: str = OLLAMA_BASE_URL):
         self.model = model
         self.base_url = base_url.rstrip("/")
         logger.info(f"Ollama Client initialized (Model: {self.model}, URL: {self.base_url})")
@@ -45,7 +45,7 @@ class OllamaAIService:
                     "stream": True 
                 },
                 stream=True,
-                timeout=Config.OLLAMA_TIMEOUT
+                timeout=OLLAMA_TIMEOUT
             )
             response.raise_for_status()
 
