@@ -36,31 +36,52 @@ st.markdown("""
 }
 
 /* ---------------------------------------------------- */
-/* FOOTER FIX (Chat Input) - NEW RELIABLE METHOD        */
+/* TOP INPUT FIX (Chat Input at Top) - NEW DESIGN       */
 /* ---------------------------------------------------- */
 
 /* Targets the container wrapping the chat input form */
 .stChatInputContainer {
     /* Critical: Override Streamlit's default relative/static positioning */
     position: fixed !important; 
-    bottom: 0 !important;
+    top: 56px !important;  /* Further reduced to tighten gap */
     left: 50% !important;
     transform: translateX(-50%) !important;
     max-width: 700px !important; 
     width: 100% !important;
-    z-index: 1000;
-    /* Add padding/styling to match the aesthetic of your fixed-footer-container */
+    z-index: 999;
+    /* Add padding/styling to match the aesthetic */
     background-color: var(--background-color); 
-    padding-top: 0.5rem;
-    padding-bottom: 1rem; 
-    box-shadow: 0 -2px 4px rgba(0,0,0,0.1); 
+    padding: 1rem 0.5rem 0.5rem 0.5rem; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    border-bottom: 1px solid #e0e0e0;
 }
 
-/* Ensure the main content block has enough bottom padding to prevent overlap */
+/* Welcome message container (above input) */
+.welcome-message-container {
+    position: fixed;
+    top: 48px;  /* Position below header */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 700px;
+    width: 100%;
+    z-index: 998;
+    padding: 0 0.5rem;
+}
+
+/* Chat messages container with scrollable area */
+.chat-messages-container {
+    max-height: calc(100vh - 136px);  /* Further reduced to bring messages closer */
+    overflow-y: auto;
+    padding: 0 0.5rem;
+    margin-top: 96px;  /* Further reduced top space for header + input */
+    margin-bottom: 2rem;
+}
+
+/* Ensure the main content block has proper spacing */
 .main .block-container {
     max-width: 700px; 
-    padding-top: 100px;    /* Space for Fixed Header */
-    padding-bottom: 120px; /* Space for Fixed Chat Input */
+    padding-top: 0;     /* No top padding needed since input is at top */
+    padding-bottom: 0;  /* No bottom padding needed */
 }
 
 /* General Styling */
@@ -80,6 +101,82 @@ footer {visibility: hidden;}
     line-height: 1.4;
     max-width: 95%;
     word-wrap: break-word;
+}
+
+/* Auto-scroll functionality - scrolls to top for newest messages */
+.auto-scroll {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for chat messages */
+.chat-messages-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .fixed-header-container {
+        padding-top: 1rem;
+        padding-bottom: 0.25rem;
+    }
+    
+    .welcome-message-container {
+        top: 44px;
+    }
+    
+    .stChatInputContainer {
+        top: 52px !important;
+        padding: 0.75rem 0.25rem 0.25rem 0.25rem;
+    }
+    
+    .chat-messages-container {
+        margin-top: 90px;
+        max-height: calc(100vh - 130px);
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fixed-header-container {
+        padding-top: 0.75rem;
+        padding-bottom: 0.25rem;
+    }
+    
+    .welcome-message-container {
+        top: 40px;
+    }
+    
+    .stChatInputContainer {
+        top: 48px !important;
+        padding: 0.5rem 0.25rem 0.25rem 0.25rem;
+    }
+    
+    .chat-messages-container {
+        margin-top: 84px;
+        max-height: calc(100vh - 124px);
+        padding: 0 0.25rem;
+    }
+    
+    h1 {
+        font-size: 18px;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -186,51 +283,34 @@ def render_header(title: str, is_settings: bool):
 
 
 def render_chat_view():
-    """Renders the main Chat interface (Middle part)."""
+    """Renders the main Chat interface with input at top and messages below."""
     
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # Chat messages display container (flows naturally, scroll is handled by the browser)
-    chat_container = st.container(border=False)
+    # --- WELCOME MESSAGE ABOVE INPUT (Fixed Position) ---
+    if not st.session_state.messages:
+        st.markdown('<div class="welcome-message-container">', unsafe_allow_html=True)
+        st.info("👋 Hello! I'm Lia, your HR Assistant. Ask me a question about company policies!")
+        st.markdown('</div>', unsafe_allow_html=True)
 
-    with chat_container:
-        if not st.session_state.messages:
-            st.info("👋 Hello! I'm Lia, your HR Assistant. Ask me a question about company policies!")
-        
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-                if message.get("sources"):
-                    with st.expander("📚 Sources Retrieved"):
-                        for source in message["sources"]:
-                            st.caption(f"**{source}**")
-    
-    # --- CHAT INPUT (No custom fixed container wrappers needed anymore) ---
-    
+    # --- CHAT INPUT AT TOP (Fixed Position) ---
     if query := st.chat_input("Ask a question about HR policies...", key="chat_input_main"):
         
         st.session_state.messages.append({"role": "user", "content": query})
         
-        # Call the API and display the response
-        with chat_container:
-            with st.chat_message("assistant"):
-                with st.spinner("Lia is thinking..."):
-                    response_data = call_chat_api(query)
-                
-                error_message = response_data.get("error")
-                if error_message:
-                    st.error(f"System Error: {error_message}")
-                    lia_response = f"I'm sorry, an internal error occurred while trying to process your request."
-                    sources = None
-                else:
-                    lia_response = response_data.get("answer", "I could not find an answer in the policy documents.")
-                    sources = response_data.get("source_documents", [])
-                    st.markdown(lia_response)
-                    if sources:
-                        with st.expander("📚 Sources Retrieved"):
-                            for source in sources:
-                                st.caption(f"**{source}**")
+        # Call the API and get response
+        with st.spinner("Lia is thinking..."):
+            response_data = call_chat_api(query)
+        
+        error_message = response_data.get("error")
+        if error_message:
+            st.error(f"System Error: {error_message}")
+            lia_response = f"I'm sorry, an internal error occurred while trying to process your request."
+            sources = None
+        else:
+            lia_response = response_data.get("answer", "I could not find an answer in the policy documents.")
+            sources = response_data.get("source_documents", [])
 
         st.session_state.messages.append({
             "role": "assistant", 
@@ -238,8 +318,57 @@ def render_chat_view():
             "sources": sources
         })
         st.rerun()
+    
+    # --- CHAT MESSAGES DISPLAY (Scrollable Area Below Input) ---
+    
+    # Create a scrollable container for messages
+    st.markdown('<div class="chat-messages-container auto-scroll">', unsafe_allow_html=True)
+    
+    # Display messages in pairs (user query + AI response) with newest pairs first
+    messages = st.session_state.messages
+    # Group messages into pairs (user + assistant)
+    message_pairs = []
+    i = 0
+    while i < len(messages):
+        if i + 1 < len(messages) and messages[i]["role"] == "user" and messages[i + 1]["role"] == "assistant":
+            # Found a complete pair
+            message_pairs.append((messages[i], messages[i + 1]))
+            i += 2
+        else:
+            # Handle orphaned messages (shouldn't happen in normal flow)
+            message_pairs.append((messages[i], None))
+            i += 1
+    
+    # Display pairs in reverse order (newest first)
+    for user_msg, assistant_msg in reversed(message_pairs):
+        # Display user message first
+        with st.chat_message(user_msg["role"]):
+            st.markdown(user_msg["content"])
         
-    # --- END CHAT INPUT ---
+        # Display assistant response below user message
+        if assistant_msg:
+            with st.chat_message(assistant_msg["role"]):
+                st.markdown(assistant_msg["content"])
+                if assistant_msg.get("sources"):
+                    with st.expander("📚 Sources Retrieved"):
+                        for source in assistant_msg["sources"]:
+                            st.caption(f"**{source}**")
+    
+    # Auto-scroll to top when new messages are added (since newest messages are at top)
+    if st.session_state.messages:
+        st.markdown("""
+        <script>
+        // Auto-scroll to top of chat messages (newest messages are at top)
+        setTimeout(function() {
+            const chatContainer = document.querySelector('.chat-messages-container');
+            if (chatContainer) {
+                chatContainer.scrollTop = 0;
+            }
+        }, 100);
+        </script>
+        """, unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 def render_settings_view():

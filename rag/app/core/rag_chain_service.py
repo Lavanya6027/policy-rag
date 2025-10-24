@@ -16,7 +16,7 @@ def _build_rag_prompt(question: str, context_docs: List[LcDocument]) -> str:
     formatted_context = []
     for i, doc in enumerate(context_docs):
         # Extract filename from metadata
-        source = doc.metadata.get('filename', 'Unknown Source')
+        source = doc.metadata.get('file_name', 'Unknown Source')
         content = doc.page_content.strip()
         formatted_context.append(f"--- (Source: {source}) ---\n{content}\n")
 
@@ -74,7 +74,7 @@ async def process_rag_query(
         formatted_context = [
             ContextDocument(
                 page_content=doc.page_content,
-                source=doc.metadata.get('filename', 'Unknown'),
+                source=doc.metadata.get('file_name', 'Unknown'),
                 score=doc.metadata.get('relevance_score') # Score may not be exposed by PDR/Chroma
             )
             for doc in context_docs

@@ -7,6 +7,22 @@
       "size_bytes": 381720,
       "uploaded_at": "2025-10-24T11:22:20.402845",
       "mime_type": "application/pdf"
+    },
+    {
+      "id": "1e7ac904-ad19-4166-aa0b-7a3e46d05667",
+      "file_name": "Extended Work Hours - Policy.docx",
+      "storage_path": "corpora\\1e7ac904-ad19-4166-aa0b-7a3e46d05667_Extended Work Hours - Policy.docx",
+      "size_bytes": 164608,
+      "uploaded_at": "2025-10-24T12:48:03.099877",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "id": "40daad78-8b54-4e0c-9da1-1b00a1bd153c",
+      "file_name": "GMC Insurance Reimbursement Claim Form.pdf",
+      "storage_path": "corpora\\40daad78-8b54-4e0c-9da1-1b00a1bd153c_GMC Insurance Reimbursement Claim Form.pdf",
+      "size_bytes": 470701,
+      "uploaded_at": "2025-10-24T13:03:46.428540",
+      "mime_type": "application/pdf"
     }
   ]
 }
