@@ -36,36 +36,46 @@ class VectorRetrieverLoader:
         )
 
     def load_retriever(self) -> BaseRetriever:
-        """Loads or creates the index and returns the retriever."""
-        
-        # 1. Attempt to load existing index
-        vector_store = self.store_manager.load_or_create_vector_store(force_rebuild=False)
+            """
+            Loads or creates the index and returns the retriever.
+            
+            Note: This is modified to always force a rebuild/reindexing,
+            clearing any existing data.
+            """
+            
+            # 1. Force a rebuild/reindex right away by passing force_rebuild=True
+            # This clears any existing index based on the store_manager's implementation.
+            logger.info("Starting index rebuild for VectorRetrieverLoader (forced).")
+            
+            # Calling load_or_create_vector_store with force_rebuild=True here
+            # ensures the old data is cleared before we attempt to index new data.
+            # This is a good practice to ensure the vector store is properly reset.
+            _ = self.store_manager.load_or_create_vector_store(force_rebuild=True) 
 
-        # Check if the store was successfully loaded and contains data
-        # Note: Accessing private attribute `_collection` is a workaround for ChromaDB count
-        if vector_store and hasattr(vector_store, '_collection') and vector_store._collection.count() > 0 and not self.cleanup_existing:
-            logger.info("Existing index loaded successfully.")
-            return vector_store.as_retriever()
-        
-        # 2. Rebuild is required (or forced)
-        logger.info("Starting index rebuild for VectorRetrieverLoader.")
-        raw_documents = self.doc_processor.load_raw_documents()
-        
-        if not raw_documents:
-            logger.warning("No documents loaded to index. Creating empty vector store.")
-            vector_store = self.store_manager.load_or_create_vector_store(force_rebuild=True)
-            return vector_store.as_retriever()
+            # 2. Load and process documents
+            raw_documents = self.doc_processor.load_raw_documents()
+            
+            if not raw_documents:
+                logger.warning("No documents loaded to index. Creating empty vector store.")
+                # Still call load_or_create_vector_store with force_rebuild=True 
+                # to ensure an empty, fresh store is returned if no docs are found.
+                vector_store = self.store_manager.load_or_create_vector_store(force_rebuild=True)
+                return vector_store.as_retriever()
 
-        chunks = self.doc_processor.chunk_documents(
-            documents=raw_documents, 
-            chunk_size=self.chunk_size, 
-            chunk_overlap=self.chunk_overlap
-        )
-        
-        # 3. Create the new index and get the retriever
-        vector_store = self.store_manager.load_or_create_vector_store(
-            documents_to_index=chunks, 
-            force_rebuild=True
-        )
-        logger.info("Retriever successfully initialized.")
-        return vector_store.as_retriever()
+            chunks = self.doc_processor.chunk_documents(
+                documents=raw_documents, 
+                chunk_size=self.chunk_size, 
+                chunk_overlap=self.chunk_overlap
+            )
+            logger.info(f"chunks: {chunks[0]}")
+            
+            # 3. Create the new index and get the retriever by indexing the chunks
+            # force_rebuild=True is already ensured here, but it's good practice
+            # to pass it again if load_or_create_vector_store handles the actual 
+            # indexing logic and might implicitly clear/rebuild.
+            vector_store = self.store_manager.load_or_create_vector_store(
+                documents_to_index=chunks, 
+                force_rebuild=True
+            )
+            logger.info("Retriever successfully initialized with new index.")
+            return vector_store.as_retriever()

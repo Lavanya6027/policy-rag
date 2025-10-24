@@ -1,5 +1,7 @@
 import logging
 from typing import List
+from pathlib import Path
+
 from langchain_core.retrievers import BaseRetriever
 from langchain_core.documents import Document as LcDocument
 from app.core.llm import AIService
@@ -70,6 +72,8 @@ async def process_rag_query(
         # 4. Format Output (RAGResponse)
         if llm_result.get("error"):
             raise RuntimeError(f"LLM generation failed: {llm_result['error']}")
+        
+        logger.info(f"retrieved context: {context_docs[0].model_dump()}")
 
         formatted_context = [
             ContextDocument(
