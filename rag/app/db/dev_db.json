@@ -1,27 +1,11 @@
 {
   "resources": [
     {
-      "id": "8c95d072-eb03-4bf6-a708-0cba67cddfbf",
-      "file_name": "International Travel Policy.pdf",
-      "storage_path": "corpora\\8c95d072-eb03-4bf6-a708-0cba67cddfbf_International Travel Policy.pdf",
-      "size_bytes": 995014,
-      "uploaded_at": "2025-10-17T09:18:26.369036",
-      "mime_type": "application/pdf"
-    },
-    {
-      "id": "86e6e579-d42d-438d-836d-c47abb29d116",
-      "file_name": "International Travel Policy.pdf",
-      "storage_path": "corpora\\86e6e579-d42d-438d-836d-c47abb29d116_International Travel Policy.pdf",
-      "size_bytes": 995014,
-      "uploaded_at": "2025-10-17T09:18:34.397237",
-      "mime_type": "application/pdf"
-    },
-    {
-      "id": "5488f1c2-a875-40d5-a0fe-0ddb36d0c7d2",
-      "file_name": "Information Security Policy.pdf",
-      "storage_path": "corpora\\5488f1c2-a875-40d5-a0fe-0ddb36d0c7d2_Information Security Policy.pdf",
-      "size_bytes": 446887,
-      "uploaded_at": "2025-10-17T09:21:58.408991",
+      "id": "ef236cdc-c2ef-416c-b00d-9b78b02a23e4",
+      "file_name": "Leave Encashment Policy (1).pdf",
+      "storage_path": "corpora\\ef236cdc-c2ef-416c-b00d-9b78b02a23e4_Leave Encashment Policy (1).pdf",
+      "size_bytes": 381720,
+      "uploaded_at": "2025-10-24T11:22:20.402845",
       "mime_type": "application/pdf"
     }
   ]

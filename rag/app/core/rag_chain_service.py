@@ -18,7 +18,7 @@ def _build_rag_prompt(question: str, context_docs: List[LcDocument]) -> str:
         # Extract filename from metadata
         source = doc.metadata.get('filename', 'Unknown Source')
         content = doc.page_content.strip()
-        formatted_context.append(f"--- Document {i+1} (Source: {source}) ---\n{content}\n")
+        formatted_context.append(f"--- (Source: {source}) ---\n{content}\n")
 
     context_str = "\n".join(formatted_context)
 

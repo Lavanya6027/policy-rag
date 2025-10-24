@@ -96,6 +96,8 @@ async def chat_with_assistant(
     chat_log["retrieved context"] = response.context
     chat_log["model_name"] = response.model_name
 
+    await chat_logger.log_chat_entry(chat_log)
+
     if response.error:
         logger.error(f"Chat endpoint returned an error: {response.error}")
         return JSONResponse(
