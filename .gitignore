@@ -51,6 +51,7 @@ Thumbs.db
 *.csv
 *.db
 *.sqlite
+*.json
 
 # -----------------------------
 # Chroma / RAG vectorstore
@@ -60,3 +61,4 @@ vector_store/
 corpora/
 temp/
 tests/
+dev_db.json/
