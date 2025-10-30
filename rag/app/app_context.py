@@ -20,12 +20,11 @@ from app.core.chat_logger import ChatLogger
 
 logger = logging.getLogger(__name__)
 
-# --- Configuration ---
 DB_FILE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'db', 'dev_db.json')
 
 RAG_CONTENT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'corpora')
 RAG_VECTOR_STORE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vector_store', 'chroma_db') # Adjusted path name for standard vector store
-RAG_COLLECTION_NAME = "vector_collection" # Adjusted collection name
+RAG_COLLECTION_NAME = "vector_collection"
 RAG_CLEANUP_EXISTING = False 
 
 STATE: Dict[str, Any] = {}
@@ -34,7 +33,6 @@ def initialize_rag_retriever(embedding_model: Embeddings, cleanup_existing: bool
     """Instantiates the VectorRetrieverLoader and calls its load_retriever."""
     print("Initializing RAG Retriever (Standard Vector Retriever)...")
     
-    # Using sensible defaults for standard RAG chunking
     CHUNK_SIZE = 1000
     CHUNK_OVERLAP = 200
 
@@ -62,7 +60,6 @@ def update_rag_retriever(new_retriever: BaseRetriever):
     STATE['RAG_RETRIEVER'] = new_retriever
     logger.info("RAG Retriever instance in STATE successfully updated.")
 
-# --- Application Lifespan ---
 @asynccontextmanager
 async def lifespan_startup_shutdown(app: Any):
     """Initializes DAL, the embedding model, and the RAG retriever on startup."""
@@ -86,7 +83,6 @@ async def lifespan_startup_shutdown(app: Any):
         
         print("All necessary resources and RAG system successfully initialized.")
     except Exception:
-        # Ensure cleanup even on startup failure
         STATE.clear()
         raise
     
@@ -95,7 +91,6 @@ async def lifespan_startup_shutdown(app: Any):
     print("Executing application shutdown sequence...")
     STATE.clear() 
 
-# --- FastAPI Dependencies ---
 
 def get_resource_repository() -> JsonRepository:
     """Provides the initialized ResourceRepository instance."""

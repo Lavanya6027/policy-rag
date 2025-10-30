@@ -73,7 +73,10 @@ async def process_rag_query(
         if llm_result.get("error"):
             raise RuntimeError(f"LLM generation failed: {llm_result['error']}")
         
-        logger.info(f"retrieved context: {context_docs[0].model_dump()}")
+        if context_docs:
+            logger.info(f"retrieved context: {context_docs[0].model_dump()}")
+        else:
+            logger.warning("No context documents retrieved. Skipping context logging.")
 
         formatted_context = [
             ContextDocument(
